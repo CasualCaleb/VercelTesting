@@ -1,35 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useRef } from "react";
+import { Slider, Typography, Box } from '@mui/material';
+import tecca from "/tecca.mp3"
+import iphone from "/giphy.gif"
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    const [volume, setVolume] = useState(0);
+    const audioRef = useRef(new Audio(tecca));
+
+    const handleChange = (_, newValue) => {
+        setVolume(newValue);
+        audioRef.current.volume = newValue / 100; // volume is 0–1
+    };
+
+    audioRef.current.play();
+
+    return (
+        <>
+            <div className="welcome">
+                <h1>Enjoy</h1>
+                <img className="iphone" src={iphone}/>
+            </div>
+            <div className="audio-controls">
+                <Box sx={{ p: 10, textAlign: "center" }}>
+                    <Typography gutterBottom>Volume</Typography>
+
+                    <audio ref={audioRef} src={tecca} preload="auto" />
+                    <img className="audio-symbol" src="/audio.svg" />
+
+                    <Slider
+                        value={volume}
+                        onChange={handleChange}
+                        sx={{
+                            filter: 'drop-shadow(0 0 2px #afafaf)',
+                            width: 500,
+                            color: '#ffffff',
+                            '& .MuiSlider-thumb': {
+                                '&:hover, &.Mui-focusVisible': {
+                                    boxShadow: '0 0 0 8px rgba(255, 255, 255, 0.2)', // white glow ring
+                                },
+                                '&::before': {
+                                    boxShadow: 'none', // kills MUI's default blue pulse ring
+                                },
+                            },
+                        }}
+                    />
+                </Box>
+            </div>
+        </>
+    );
 }
 
-export default App
+export default App;

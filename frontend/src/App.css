@@ -1,8 +1,8 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 .logo {
@@ -39,4 +39,58 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.audio-symbol {
+  height: 30px;
+  margin-right: 20px;
+  filter: invert(1) brightness(2);
+}
+
+.welcome {
+  margin-top: 125px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.audio-controls {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iphone {
+  height: 300px;
+  justify-content: center;
+  animation: spin 50s linear infinite;
+  transition: 1s ease-in-out;
+  z-index: 10;
+}
+.iphone:hover {
+  filter: drop-shadow(0 0 4px #ba5bff);
+  scale: 200%;
+}
+
+.bg {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -1;
+
+  scale: 70%;
+  top: 20px;   /* moves it down 100px from the top */
+  left: 210px;   /* moves it right 50px from the left */
 }
